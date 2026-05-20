@@ -1098,36 +1098,7 @@
     <p class="footer-copyright">© 2025 DRAGOON · NAIL</p>
   </footer>
 
-  <!-- ═══════════════════════════════════
-       COOKIE BANNER (ФЗ-152)
-  ═══════════════════════════════════ -->
-  <div class="cookie-banner" id="cookieBanner">
-    <p class="cookie-banner__text">
-      Сайт использует cookie. <a href="https://dragoonnail.tilda.ws/privacy" target="_blank" rel="noopener">Подробнее</a>.
-    </p>
-    <div class="cookie-banner__btns">
-      <button class="cookie-banner__btn" onclick="declineCookies()">Нет</button>
-      <button class="cookie-banner__btn cookie-banner__btn--accept" onclick="acceptCookies()">Ок</button>
-    </div>
-  </div>
-
   <script>
-    (function () {
-      var banner = document.getElementById('cookieBanner');
-      var saved = localStorage.getItem('cookieConsent');
-      if (!saved) {
-        banner.classList.add('show');
-      }
-    })();
-    function acceptCookies() {
-      localStorage.setItem('cookieConsent', 'accepted');
-      document.getElementById('cookieBanner').classList.remove('show');
-    }
-    function declineCookies() {
-      localStorage.setItem('cookieConsent', 'declined');
-      document.getElementById('cookieBanner').classList.remove('show');
-    }
-
     // Drag-to-scroll for carousels (desktop)
     document.querySelectorAll('.carousel').forEach(function (c) {
       var isDown = false, startX, scrollLeft;
