@@ -933,6 +933,67 @@
       text-underline-offset: 2px;
     }
 
+    /* ─── FAQ ─── */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 24px;
+    }
+    .faq-item {
+      border-bottom: 1px solid rgba(61,10,21,0.12);
+    }
+    .faq-item:first-child {
+      border-top: 1px solid rgba(61,10,21,0.12);
+    }
+    .faq-item summary {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -0.1px;
+      padding: 18px 0;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      color: var(--dark);
+      text-transform: none;
+      line-height: 1.3;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      opacity: 0.4;
+      flex-shrink: 0;
+    }
+    .faq-item[open] summary::after { content: '−'; opacity: 0.7; }
+    .faq-body {
+      padding: 0 0 22px 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(61,10,21,0.78);
+    }
+    .faq-body ul {
+      list-style: none;
+      margin-top: 10px;
+    }
+    .faq-body li {
+      padding: 5px 0 5px 18px;
+      position: relative;
+    }
+    .faq-body li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     /* ─── MODAL ─── */
     .modal-overlay {
       display: none;
@@ -1394,6 +1455,88 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ─── FAQ ─── -->
+  <section class="s-warm">
+    <p class="sec-label">Ответы на вопросы</p>
+    <h2 class="sec-title">Частые вопросы</h2>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Что входит в стоимость курса?</summary>
+        <div class="faq-body">
+          <ul>
+            <li>Все материалы на курсе (инструменты — свои)</li>
+            <li>Модели для отработки техник</li>
+            <li>Чай и конфетки в течение дня</li>
+            <li>Сертификат или диплом гос-образца (по выбору)</li>
+            <li>Доступ в чат поддержки после курса</li>
+            <li>Гайды по отслойкам и инструментам (электронно)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>А если не получится с первого раза?</summary>
+        <div class="faq-body">
+          На курсе работаем до результата. Если на модели не пошло — разбираем что не так и переделываем, не уходишь без чистой работы. После курса есть чат поддержки — пишешь, разбираем вместе.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Можно с очень тонкими или повреждёнными ногтями?</summary>
+        <div class="faq-body">
+          Да, специально для этого есть техника укрепления в ноль и ламинирование. На курсе разбираем как работать с тонкими, мягкими и проблемными ногтями — это часть программы.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Нужна ли база маникюра от моей школы?</summary>
+        <div class="faq-body">
+          Курсы рассчитаны на мастеров с базой по маникюру — неважно, какая школа была. Если опыт меньше 6 месяцев — пиши, обсудим.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>В чём разница: сертификат и диплом гос-образца?</summary>
+        <div class="faq-body">
+          Настенный сертификат — внутренний документ школы. Диплом гос-образца — официальный, моя аккредитация это позволяет. Полезен если работаешь от ИП или хочешь использовать в портфолио / салоне.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Где проходит курс и сколько человек в группе?</summary>
+        <div class="faq-body">
+          Москва, г. Реутов, Юбилейный пр-т, д. 8. В группе 2-3 человека — это принципиально. Каждой ученице — внимание лично.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Что нужно с собой взять?</summary>
+        <div class="faq-body">
+          <ul>
+            <li>Тетрадь и ручку — для записей</li>
+            <li>Свой стерильный набор инструментов</li>
+            <li>Удобную одежду</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>А если я опоздаю на теорию?</summary>
+        <div class="faq-body">
+          Не страшно. Теоретическая часть высылается в электронном виде — можешь изучить в любой момент. Все вопросы потом задаёшь в чате поддержки — отвечаю лично.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>А если не смогу прийти — можно перенести?</summary>
+        <div class="faq-body">
+          Перенос места на следующий поток бесплатно, если предупредишь минимум за 3 дня. Без предупреждения — депозит сгорает.
+        </div>
+      </details>
     </div>
   </section>
 
