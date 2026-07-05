@@ -76,42 +76,57 @@
     .hero {
       position: relative;
       min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 70px 24px 40px;
       color: var(--cream);
       overflow: hidden;
     }
     .hero__bg {
       position: absolute;
       inset: 0;
-      background: var(--darker);
+      background: url('works-vf/hero-vf-2.jpg') center 40%/cover no-repeat, var(--darker);
       overflow: hidden;
-    }
-    .hero__bg-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(245,240,235,0.25);
-      padding: 24px;
-      text-align: center;
-      line-height: 1.6;
     }
     .hero__overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(to bottom,
-        rgba(0,0,0,0.35) 0%,
-        rgba(0,0,0,0.4) 40%,
-        rgba(0,0,0,0.9) 75%,
-        rgba(0,0,0,0.99) 100%);
+        rgba(0,0,0,0.65) 0%,
+        rgba(0,0,0,0.15) 32%,
+        rgba(0,0,0,0) 55%,
+        rgba(0,0,0,0.55) 100%);
+    }
+    .hero__topcontent {
+      position: absolute;
+      top: 78px; left: 24px; right: 24px;
+      z-index: 1;
+    }
+    .hero__btnbottom {
+      position: absolute;
+      bottom: 34px; left: 24px; right: 24px;
+      z-index: 1;
+    }
+    .hero__topbar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 2;
+      padding: 30px 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      color: var(--cream);
+    }
+    .hero__mark {
+      font-family: var(--font-display);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.65;
+    }
+    .hero__num {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-size: 26px;
+      opacity: 0.5;
+      line-height: 0.7;
     }
     .hero__content { position: relative; z-index: 1; }
     .hero__tag {
@@ -125,29 +140,23 @@
     .hero__title {
       font-family: var(--font-italic);
       font-style: italic;
-      font-size: clamp(38px, 10vw, 50px);
+      font-size: clamp(40px, 11vw, 54px);
       font-weight: 500;
-      line-height: 1.0;
+      line-height: 0.95;
       letter-spacing: -0.5px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .hero__sub {
       font-family: var(--font-display);
-      font-size: clamp(13px, 3.5vw, 18px);
+      font-size: clamp(10px, 2.8vw, 13px);
       font-weight: 600;
-      letter-spacing: 3px;
+      letter-spacing: 4px;
       text-transform: uppercase;
       opacity: 0.85;
       display: block;
       margin-top: 8px;
     }
-    .hero__lead {
-      font-size: 14.5px;
-      line-height: 1.7;
-      opacity: 0.75;
-      margin: 22px 0 26px;
-      max-width: 360px;
-    }
+    .hero__lead { display: none; }
     .hero__meta {
       display: flex;
       flex-wrap: wrap;
@@ -1377,23 +1386,22 @@
 
   <!-- ─── HERO ─── -->
   <section class="hero">
-    <div class="hero__bg">
-      <div class="hero__bg-placeholder">
-        [ФОТО НА ВЕСЬ ЭКРАН]<br>
-        наращивание на верхние формы · крупный план<br>
-        мягкий тёплый свет · студийная съёмка
-      </div>
-    </div>
+    <div class="hero__bg"></div>
     <div class="hero__overlay"></div>
-    <div class="hero__content">
+    <div class="hero__topbar">
+      <span class="hero__mark">Dragoon.Nail</span>
+      <span class="hero__num">01</span>
+    </div>
+    <div class="hero__topcontent">
       <p class="hero__tag">Офлайн · Три ступени · Москва</p>
       <h1 class="hero__title">Верхние формы.<span class="hero__sub">Три ступени роста</span></h1>
-      <p class="hero__lead">Мастера, которые работают с формами уверенно, берут за наращивание другие деньги. Разница не в таланте — в системе.</p>
       <div class="hero__meta">
         <span class="hero__badge">3 курса</span>
         <span class="hero__badge">Малая группа</span>
         <span class="hero__badge">Гос-диплом</span>
       </div>
+    </div>
+    <div class="hero__btnbottom">
       <a href="#tarif" class="btn btn--cream">Выбрать тариф</a>
     </div>
   </section>
