@@ -378,6 +378,41 @@
       line-height: 1.65;
       color: rgba(61,10,21,0.78);
     }
+    .doc-compare { display: flex; flex-direction: column; gap: 10px; }
+    .doc-card {
+      border: 1px solid rgba(61,10,21,0.14);
+      border-radius: 12px;
+      padding: 16px 16px 18px;
+      background: var(--cream-soft);
+    }
+    .doc-card--official { background: var(--dark); border-color: var(--dark); color: var(--cream); }
+    .doc-card__kicker {
+      font-family: var(--font-display);
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 6px;
+    }
+    .doc-card__name {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .doc-card__text { font-size: 13px; line-height: 1.6; opacity: 0.85; }
+    .doc-card__marks { display: flex; gap: 6px; margin-top: 12px; }
+    .doc-card__marks span {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      border: 1px solid rgba(245,240,235,0.35);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+    .doc-compare__note { margin-top: 12px; font-size: 13px; }
     .faq-body ul {
       list-style: none;
       margin-top: 10px;
@@ -1384,7 +1419,7 @@
       <div class="hero__meta">
         <span class="hero__badge">3 курса</span>
         <span class="hero__badge">Малая группа</span>
-        <span class="hero__badge">Гос-диплом</span>
+        <span class="hero__badge">Свидетельство в ФРДО</span>
       </div>
     </div>
     <div class="hero__btnbottom">
@@ -1466,7 +1501,7 @@
     <div class="step-meta">
       <span class="step-meta__item">2 дня</span>
       <span class="step-meta__item">21–22 октября · 18–19 ноября</span>
-      <span class="step-meta__item">Гос-диплом</span>
+      <span class="step-meta__item">Свидетельство в ФРДО</span>
     </div>
 
     <div class="photo-accent photo-accent--right">
@@ -1764,7 +1799,7 @@
         <span class="tariff-tag">Ступень 01</span>
         <p class="tariff-name">ВФ под ключ 1.0</p>
         <p class="tariff-price">16 990 ₽</p>
-        <p class="tariff-price-sub">или 19 000 ₽ с дипломом гос-образца</p>
+        <p class="tariff-price-sub">или 19 000 ₽ со свидетельством о повышении квалификации</p>
         <div class="tariff-dates-block">
           <p class="tariff-dates-label">Дата курса · <span style="opacity:0.7">выбрать</span></p>
           <!-- ▼ ИЗМЕНИТЬ ДАТУ КУРСА: ВФ 1.0 ▼ -->
@@ -1787,7 +1822,7 @@
         <span class="tariff-tag">Ступень 02 · 1 место</span>
         <p class="tariff-name">ВФ под ключ 2.0</p>
         <p class="tariff-price">13 990 ₽</p>
-        <p class="tariff-price-sub">или 16 000 ₽ с дипломом гос-образца</p>
+        <p class="tariff-price-sub">или 16 000 ₽ со свидетельством о повышении квалификации</p>
         <div class="tariff-dates-block">
           <p class="tariff-dates-label">Дата курса · <span style="opacity:0.7">выбрать</span></p>
           <!-- ▼ ИЗМЕНИТЬ ДАТУ КУРСА: ВФ 2.0 ▼ -->
@@ -1863,7 +1898,7 @@
             <li>Все материалы на курсе (инструменты — свои)</li>
             <li>Модели для отработки техник</li>
             <li>Чай и конфетки в течение дня</li>
-            <li>Сертификат или диплом гос-образца (по выбору)</li>
+            <li>Сертификат школы или свидетельство о повышении квалификации — на выбор</li>
             <li>Доступ в чат поддержки после курса</li>
             <li>Гайды по отслойкам и инструментам (электронно)</li>
           </ul>
@@ -1885,9 +1920,22 @@
       </details>
 
       <details class="faq-item">
-        <summary>В чём разница: сертификат и диплом гос-образца?</summary>
+        <summary>В чём разница: сертификат и свидетельство?</summary>
         <div class="faq-body">
-          Настенный сертификат — внутренний документ школы. Диплом гос-образца — официальный, моя аккредитация это позволяет. Полезен если работаешь от ИП или хочешь использовать в портфолио / салоне.
+          <div class="doc-compare">
+            <div class="doc-card">
+              <p class="doc-card__kicker">Документ школы</p>
+              <p class="doc-card__name">Сертификат</p>
+              <p class="doc-card__text">Подтверждает, что ты прошла курс в DRAGOON.NAIL. Для портфолио и рабочего места — красиво смотрится на стене кабинета.</p>
+            </div>
+            <div class="doc-card doc-card--official">
+              <p class="doc-card__kicker">Официальный документ</p>
+              <p class="doc-card__name">Свидетельство о повышении квалификации</p>
+              <p class="doc-card__text">Сведения о нём вносятся в федеральный реестр ФРДО, а сам документ появляется в твоём личном кабинете на Госуслугах. Подлинность может проверить любой работодатель.</p>
+              <div class="doc-card__marks"><span>ФРДО</span><span>Госуслуги</span></div>
+            </div>
+          </div>
+          <p class="doc-compare__note">Свидетельство пригодится, если работаешь официально, устраиваешься в салон или студию.</p>
         </div>
       </details>
 
