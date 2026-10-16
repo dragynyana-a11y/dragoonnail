@@ -787,6 +787,26 @@
       border-color: var(--cream);
     }
     .cookie-banner__btn:hover { opacity: 0.85; }
+  
+    /* ─── АНИМАЦИИ ШАПКИ ─── */
+    @keyframes heroZoom { from { transform: scale(1.12); } to { transform: scale(1); } }
+    @keyframes heroFade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes heroUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    @keyframes heroSpread { from { opacity: 0; letter-spacing: 12px; } to { opacity: 1; letter-spacing: 2px; } }
+    @keyframes heroFrame { from { clip-path: inset(0 100% 100% 0); } to { clip-path: inset(0 0 0 0); } }
+    @keyframes heroDrift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    .hero__photo-wrap { overflow: hidden; }
+    .hero__photo { animation: heroZoom 2.8s cubic-bezier(.2,.7,.1,1) both, heroFade 1.2s ease both; }
+    .hero__overlay { animation: heroFade 1.6s ease .3s both; }
+    .hero__frame { animation: heroFrame 1.8s cubic-bezier(.2,.7,.1,1) .6s both; }
+    .hero__hook { animation: heroUp 1s cubic-bezier(.2,.7,.1,1) .9s both; }
+    .hero__name { animation: heroSpread 1.6s cubic-bezier(.2,.7,.1,1) 1.05s both; }
+    .hero__tagline { animation: heroUp 1s cubic-bezier(.2,.7,.1,1) 1.35s both; }
+    .hero__content .btn-outline { animation: heroUp 1s cubic-bezier(.2,.7,.1,1) 1.55s both; }
+    .hero__content .btn-outline + .btn-outline { animation-delay: 1.7s; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero__photo, .hero__overlay, .hero__frame, .hero__hook, .hero__name, .hero__tagline, .hero__content .btn-outline { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -797,7 +817,7 @@
   <div class="hero">
     <div class="hero__photo-wrap">
       <!-- ✏️ ФОТО ГЕРОЯ: замени hero.jpg на своё фото (вертикальное 9:16) -->
-      <img class="hero__photo" src="hero-yana-wide.jpg" alt="Яна Драгун" style="object-position: center bottom" />
+      <img class="hero__photo" src="hero-yana-2.jpg" alt="Яна Драгун" style="object-position: center bottom" />
       <div class="hero__overlay"></div>
       <div class="hero__frame"></div>
     </div>
