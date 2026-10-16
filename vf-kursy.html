@@ -1025,6 +1025,8 @@
       cursor: pointer;
       line-height: 1;
     }
+    .modal { max-height: 92vh; overflow-y: auto; }
+    .modal__frame { display: block; width: 100%; height: 720px; border: 0; }
     .modal__sub { font-size: 13px; opacity: 0.6; line-height: 1.5; margin: 8px 0 24px; }
     .modal__field { margin-bottom: 14px; }
     .modal__label {
@@ -1943,9 +1945,10 @@
 
   <section class="site-footer">
     <ul class="footer-docs">
-      <li><a href="https://dragoonnail.tilda.ws/offer" target="_blank" rel="noopener">Оферта</a></li>
-      <li><a href="https://dragoonnail.tilda.ws/privacy" target="_blank" rel="noopener">Политика конфиденциальности</a></li>
-      <li><a href="https://dragoonnail.tilda.ws/agreement" target="_blank" rel="noopener">Согласие на ОПД</a></li>
+      <li><a href="oferta.html">Оферта</a></li>
+      <li><a href="politika.html">Политика конфиденциальности</a></li>
+      <li><a href="soglasie.html">Согласие на обработку данных</a></li>
+      <li><a href="soobshcheniya.html">Согласие на сообщения о курсах</a></li>
     </ul>
     <div class="footer-requisites">
       <p>ИП Драгун Я.А · ИНН 332134393805 · ОГРНИП 326330000005296</p>
@@ -1957,7 +1960,7 @@
   <!-- ─── COOKIE BANNER ─── -->
   <div class="cookie-banner" id="cookieBanner">
     <p class="cookie-banner__text">
-      Сайт использует cookie. <a href="https://dragoonnail.tilda.ws/privacy" target="_blank" rel="noopener">Подробнее</a>.
+      Сайт использует cookie. <a href="politika.html">Подробнее</a>.
     </p>
     <div class="cookie-banner__btns">
       <button class="cookie-banner__btn" onclick="declineCookies()">Нет</button>
@@ -1968,33 +1971,13 @@
   <!-- ─── МОДАЛКА ─── -->
   <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
     <div class="modal">
-      <div id="modal-form-area">
-        <div class="modal__head">
-          <p class="modal__title">Забронировать место</p>
-          <button class="modal__close" onclick="closeModal()">×</button>
-        </div>
-        <p class="modal__sub" id="modal-sub">Оставь имя и контакт — Яна свяжется и подтвердит бронь</p>
-        <form onsubmit="submitForm(event)">
-          <div class="modal__field">
-            <label class="modal__label" for="f-name">Имя</label>
-            <input class="modal__input" id="f-name" type="text" placeholder="Как тебя зовут" required>
-          </div>
-          <div class="modal__field">
-            <label class="modal__label" for="f-contact">Telegram / ВК / телефон</label>
-            <input class="modal__input" id="f-contact" type="text" placeholder="@username или +7..." required>
-          </div>
-          <div class="modal__consent">
-            <input type="checkbox" id="f-consent" required>
-            <label for="f-consent">Согласен(на) на обработку персональных данных в соответствии с <a href="https://dragoonnail.tilda.ws/privacy" target="_blank" rel="noopener">политикой конфиденциальности</a></label>
-          </div>
-          <button type="submit" class="btn btn--cream" style="margin-top: 12px">Отправить заявку</button>
-        </form>
+      <div class="modal__head">
+        <p class="modal__title">Забронировать место</p>
+        <button class="modal__close" onclick="closeModal()">×</button>
       </div>
-      <div class="modal__success" id="modal-success">
-        <div class="modal__success-icon">✓</div>
-        <p class="modal__success-title">Заявка отправлена</p>
-        <p class="modal__success-text">Яна свяжется с тобой в ближайшее время</p>
-      </div>
+      <p class="modal__sub" id="modal-sub"></p>
+      <!-- Яндекс Форма «Запись на курс». Заявки и согласия хранятся в аккаунте Яны -->
+      <iframe class="modal__frame" id="modal-frame" name="ya-form-6ad23c55c45c07b0613c7b92" title="Запись на курс" frameborder="0"></iframe>
     </div>
   </div>
 
@@ -2038,6 +2021,14 @@
 
     // ─── Modal ───
     let currentCourse = '', currentPrice = '', currentType = '';
+    // Варианты ответа «Курс» в Яндекс Форме
+    const formCourseIds = {
+      'vf-1': '1792163524023',
+      'vf-2': '1792163533552',
+      'french': '1792163544320',
+    };
+    const formUrl = 'https://forms.yandex.ru/u/6ad23c55c45c07b0613c7b92/?iframe=1';
+
     function openModal(course, price, type) {
       currentCourse = course;
       currentPrice = price;
@@ -2045,8 +2036,10 @@
       const date = getDateForType(type);
       document.getElementById('modal-sub').textContent =
         course + ' · ' + price + (date ? ' · ' + date : '') + ' — оставь имя и контакт, Яна свяжется';
-      document.getElementById('modal-form-area').style.display = 'block';
-      document.getElementById('modal-success').style.display = 'none';
+      const params = new URLSearchParams();
+      if (formCourseIds[type]) params.set('answer_choices_9008991418219084', formCourseIds[type]);
+      if (date) params.set('answer_short_text_9008991418015058', date);
+      document.getElementById('modal-frame').src = formUrl + '&' + params.toString();
       document.getElementById('modal').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
@@ -2077,33 +2070,6 @@
       window.location.href = url + sep + 'description=' + encodeURIComponent(type + ' ' + date);
     }
 
-    function submitForm(e) {
-      e.preventDefault();
-      const name = document.getElementById('f-name').value;
-      const contact = document.getElementById('f-contact').value;
-      const date = getDateForType(currentType);
-      fetch('https://formsubmit.co/ajax/dragynyana@gmail.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          Имя: name,
-          Контакт: contact,
-          Курс: currentCourse,
-          Дата: date,
-          Стоимость: currentPrice,
-          _subject: 'Новая заявка ВФ — Dragoon.Nail'
-        })
-      })
-      .then(() => {
-        document.getElementById('modal-form-area').style.display = 'none';
-        document.getElementById('modal-success').style.display = 'block';
-        setTimeout(closeModal, 2500);
-      })
-      .catch(() => {
-        window.location.href = 'mailto:dragynyana@gmail.com?subject=Заявка&body=' +
-          encodeURIComponent('Имя: ' + name + '\nКонтакт: ' + contact + '\nКурс: ' + currentCourse + '\nДата: ' + date);
-      });
-    }
 
     // ─── Scroll-fade animations ───
     const fadeObserver = new IntersectionObserver((entries) => {
@@ -2164,5 +2130,6 @@
     sections.forEach(s => s && navObserver.observe(s));
   </script>
 
+  <script src="https://forms.yandex.ru/_static/embed.js"></script>
 </body>
 </html>
