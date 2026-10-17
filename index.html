@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <script>document.documentElement.classList.add('js')</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Яна Драгун — школа маникюра DRAGOON.NAIL</title>
@@ -807,6 +808,24 @@
     @media (prefers-reduced-motion: reduce) {
       .hero__photo, .hero__overlay, .hero__frame, .hero__hook, .hero__name, .hero__tagline, .hero__content .btn-outline { animation: none; }
     }
+  
+    /* ─── АНИМАЦИИ ПРИ ПРОКРУТКЕ ─── */
+    .scroll-progress { position: fixed; top: 0; left: 0; z-index: 300; width: 100%; height: 1px; background: #F5F0EB; opacity: 0.7; transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
+    .js [data-r] { opacity: 0; transform: translateY(24px); transition: opacity 1s cubic-bezier(.2,.7,.1,1), transform 1s cubic-bezier(.2,.7,.1,1); transition-delay: var(--d, 0s); }
+    .js [data-r].in { opacity: 1; transform: none; }
+    .js [data-r="left"] { transform: translateX(-24px); }
+    .js .divider { transform: scaleX(0); transform-origin: left; transition: transform 1.2s cubic-bezier(.2,.7,.1,1) .15s; }
+    .js .divider.in { transform: scaleX(1); }
+    .js [data-r="photo"] { opacity: 1; transform: none; clip-path: inset(100% 0 0 0); transition: clip-path 1.4s cubic-bezier(.2,.7,.1,1); transition-delay: var(--d, 0s); }
+    .js [data-r="photo"].in { clip-path: inset(0 0 0 0); }
+    .js [data-r="photo"] img { transform: scale(1.1); transition: transform 2s cubic-bezier(.2,.7,.1,1); transition-delay: var(--d, 0s); }
+    .js [data-r="photo"].in img { transform: none; }
+    .js .about-signature { letter-spacing: 14px; opacity: 0; transition: letter-spacing 1.6s cubic-bezier(.2,.7,.1,1), opacity 1.2s ease; }
+    .js .about-signature.in { letter-spacing: 6px; opacity: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      .js [data-r], .js [data-r="photo"], .js [data-r="photo"] img, .js .divider, .js .about-signature { opacity: 1; transform: none; clip-path: none; transition: none; }
+      .scroll-progress { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -814,6 +833,7 @@
   <!-- ═══════════════════════════════════
        ГЕРОЙ — DARK
   ═══════════════════════════════════ -->
+  <div class="scroll-progress" id="scrollProgress"></div>
   <div class="hero">
     <div class="hero__photo-wrap">
       <!-- ✏️ ФОТО ГЕРОЯ: замени hero.jpg на своё фото (вертикальное 9:16) -->
@@ -1139,6 +1159,65 @@
         c.scrollLeft = scrollLeft - (x - startX) * 1.5;
       });
     });
+
+    // ─── Анимации при прокрутке ───
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function mark(sel, kind, step) {
+        document.querySelectorAll(sel).forEach(function (el, i) {
+          el.setAttribute('data-r', kind || '');
+          if (step) el.style.setProperty('--d', ((i % 6) * step) + 's');
+        });
+      }
+      mark('section > .label, .stats-grid ~ *, .path-intro, .about-signature + *', '');
+      mark('.stat-card', '', 0.1);
+      mark('.about-photo-side, .why-photo', 'photo', 0.15);
+      mark('section .body-text, .why-photos__caption, .carousel-hint', '');
+      mark('.reason', 'left', 0.1);
+      mark('.segment-card', '', 0.12);
+      mark('.path-step', 'left', 0.08);
+      mark('.courses .btn-outline', '', 0.1);
+      mark('.carousel', '');
+      document.querySelectorAll('#zapisatsya > *:not(.label):not(.divider), .site-footer > *').forEach(function (el, i) { el.setAttribute('data-r', ''); el.style.setProperty('--d', (i * 0.08) + 's'); });
+
+      // счётчики в карточках с цифрами
+      var counters = [];
+      document.querySelectorAll('.stat-card__number').forEach(function (el) {
+        var m = el.textContent.trim().match(/^(\d+)(\D*)$/);
+        if (m) { counters.push(el); el.dataset.end = m[1]; el.dataset.suf = m[2]; if (!reduce) el.textContent = '0' + m[2]; }
+      });
+      function countUp(el) {
+        var end = +el.dataset.end, suf = el.dataset.suf, t0 = performance.now(), dur = 1700;
+        if (reduce) { el.textContent = end + suf; return; }
+        (function step(t) {
+          var p = Math.min((t - t0) / dur, 1);
+          el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))) + suf;
+          if (p < 1) requestAnimationFrame(step);
+        })(t0);
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('in');
+          var n = e.target.querySelector && e.target.querySelector('.stat-card__number');
+          if (n && n.dataset.end) countUp(n);
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -5% 0px' });
+      document.querySelectorAll('[data-r], .divider, .about-signature').forEach(function (el) { io.observe(el); });
+
+      // полоса прогресса
+      var bar = document.getElementById('scrollProgress'), ticking = false;
+      addEventListener('scroll', function () {
+        if (ticking) return; ticking = true;
+        requestAnimationFrame(function () {
+          var h = document.documentElement.scrollHeight - innerHeight;
+          bar.style.transform = 'scaleX(' + (h > 0 ? scrollY / h : 0) + ')';
+          ticking = false;
+        });
+      }, { passive: true });
+    })();
   </script>
 
 </body>
