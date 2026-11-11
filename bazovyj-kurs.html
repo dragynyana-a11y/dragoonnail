@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Базовый курс маникюра — DRAGOON.NAIL</title>
-  <meta name="description" content="Офлайн-курс маникюра с нуля в Реутове. 5 или 3 дня, группа 2–3 человека, свидетельство с внесением в ФРДО. Старт 4 ноября.">
+  <meta name="description" content="Офлайн-курс маникюра с нуля в Реутове. 5 или 3 дня, группа 2–3 человека, свидетельство с внесением в ФРДО. Старт 23 ноября.">
   <meta name="theme-color" content="#2A0710">
   <link rel="stylesheet" href="fonts/local-fonts.css">
   <script>document.documentElement.classList.add('js')</script>
@@ -407,7 +407,7 @@
     <span class="hero__vert">ПО МОЛЕКУЛАМ · ДО РЕЗУЛЬТАТА</span>
     <!-- ▼ ФОТО ШАПКИ: hero.jpg (прежнее фото с главной) ▼ -->
     <div class="hero__photo ph" data-r><img src="hero.jpg" alt="Яна Драгун"></div>
-    <p class="hero__tag" data-r style="--d:.3s"><i></i>Офлайн · Реутов · Старт 4 ноября</p>
+    <p class="hero__tag" data-r style="--d:.3s"><i></i>Офлайн · Реутов · Старт 23 ноября</p>
     <h1 class="hero__title">
       <span class="mask"><span style="--d:.35s; white-space: nowrap">Базовый курс</span></span>
       <span class="mask"><span class="italic" style="--d:.55s">маникюра</span></span>
@@ -490,7 +490,7 @@
       <button type="button" role="tab" aria-selected="true" aria-controls="p5" data-tab="p5">5 дней</button>
       <button type="button" role="tab" aria-selected="false" aria-controls="p3" data-tab="p3">3 дня</button>
     </div>
-    <p class="tabs__note" id="tabNote">4–8 ноября · полная программа, 4 модели</p>
+    <p class="tabs__note" id="tabNote">23–27 ноября · полная программа, 4 модели</p>
 
     <!-- 5 ДНЕЙ -->
     <div class="tl" id="p5" role="tabpanel">
@@ -646,7 +646,7 @@
       <!-- ▼ ТАРИФ: 5 ДНЕЙ — даты и цена ▼ -->
       <article class="plan" data-r>
         <div class="plan__top"><p class="plan__days">5 дней</p><p class="plan__tag">Полная программа</p></div>
-        <p class="plan__date">4–8 ноября 2026</p>
+        <p class="plan__date">23–27 ноября 2026</p>
         <p class="plan__price">35 000 <small>₽</small></p>
         <ul class="dash">
           <li>Аппаратный и комбинированный маникюр</li>
@@ -664,7 +664,7 @@
       <!-- ▼ ТАРИФ: 3 ДНЯ — даты и цена ▼ -->
       <article class="plan" data-r>
         <div class="plan__top"><p class="plan__days">3 дня</p><p class="plan__tag">Интенсив</p></div>
-        <p class="plan__date">4–6 ноября 2026 · в составе потока</p>
+        <p class="plan__date">23–25 ноября 2026 · в составе потока</p>
         <p class="plan__price">20 000 <small>₽</small></p>
         <ul class="dash">
           <li>Комбинированный маникюр</li>
@@ -811,7 +811,7 @@
 
   <!-- ─── ПЛАВАЮЩАЯ КНОПКА ─── -->
   <div class="sticky-cta" id="stickyCta">
-    <p>Базовый курс<small>Старт 4 ноября · группа 2–3 человека</small></p>
+    <p>Базовый курс<small>Старт 23 ноября · группа 2–3 человека</small></p>
     <a href="#tarif">Записаться</a>
   </div>
 
@@ -895,7 +895,7 @@
 
     // ─── Вкладки программы ───
     const tabs = document.querySelector('.tabs');
-    const notes = { p5: '4–8 ноября · полная программа, 4 модели', p3: '4–6 ноября · интенсив в составе потока, 2 модели' };
+    const notes = { p5: '23–27 ноября · полная программа, 4 модели', p3: '23–25 ноября · интенсив в составе потока, 2 модели' };
     tabs.addEventListener('click', e => {
       const b = e.target.closest('[data-tab]');
       if (!b || b.getAttribute('aria-selected') === 'true') return;
@@ -971,8 +971,8 @@
     // ─── Запись через Яндекс Форму: курс и даты подставляются сами ───
     const formUrl = 'https://forms.yandex.ru/u/6ad23c55c45c07b0613c7b92/?iframe=1';
     const plans = {
-      p5: { course: '9008991418219094', date: '4–8 ноября', title: 'Базовый курс · 5 дней · 35 000 ₽' },
-      p3: { course: '1792163508556', date: '4–6 ноября', title: 'Базовый курс, интенсив · 3 дня · 20 000 ₽' }
+      p5: { course: '9008991418219094', date: '23–27 ноября', title: 'Базовый курс · 5 дней · 35 000 ₽' },
+      p3: { course: '1792163508556', date: '23–25 ноября', title: 'Базовый курс, интенсив · 3 дня · 20 000 ₽' }
     };
     function openForm(key) {
       const p = plans[key];
